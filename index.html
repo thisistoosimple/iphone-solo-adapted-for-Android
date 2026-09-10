@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Solo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas class="stage"></canvas>
+
+  <div class="chrome">
+    <div class="actions">
+      <label class="pill glass">
+        Choose image
+        <input class="picker" type="file" accept="image/*">
+      </label>
+      <button class="pill glass" type="button" data-action="reset" hidden>Use default</button>
+      <button class="pill pill--browser glass" type="button" data-action="fullscreen">Fullscreen</button>
+      <a class="pill pill--browser glass" href="https://github.com/soloiaros/iphone-solo">GitHub</a>
+    </div>
+    <p class="hint glass" role="status" hidden></p>
+  </div>
+
+  <section class="unavailable" hidden>
+    <div class="unavailable__body glass">
+      <h1 class="only-phone">Open on your phone</h1>
+      <h1 class="only-laptop">Something is missing</h1>
+      <p class="only-phone">
+        Solo needs live gravity readings.
+        Open this page in Chrome on your Android phone, allow motion access,
+        then face the screen toward the sky.
+      </p>
+      <p class="unavailable__status" role="status" hidden></p>
+      <button class="pill glass" type="button" data-action="retry" hidden>Enable motion</button>
+      <a class="unavailable__link" href="https://github.com/soloiaros/iphone-solo">Source on GitHub</a>
+    </div>
+  </section>
+
+  <dialog class="sheet sheet--motion glass">
+    <p class="sheet__eyebrow">Solo · Step 1 of 2</p>
+    <h2>Roll to fold</h2>
+    <p>
+      Solo folds the picture as you roll your phone.
+      It reads the motion sensors and nothing leaves your device.
+    </p>
+    <div class="sheet__row">
+      <button class="sheet__cta" type="button" data-action="enable" autofocus>Allow motion</button>
+      <a class="sheet__credit" href="https://www.instagram.com/archieauburn/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5.5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Made by Archie Auburn
+      </a>
+    </div>
+  </dialog>
+
+  <dialog class="sheet sheet--install glass">
+    <p class="sheet__eyebrow">Solo · Step 2 of 2</p>
+    <h2>Keep it on your Home Screen</h2>
+    <p>
+      Solo is made to run as an app.
+      From the Home Screen it opens edge to edge,
+      without the browser’s bars, and remembers your photo.
+    </p>
+    <ol class="tiles">
+      <li>Tap the menu (⋮) in Chrome.</li>
+      <li>Choose Add to Home screen (or Install app).</li>
+      <li>Tap Add / Install, then open Solo from the icon.</li>
+    </ol>
+    <form class="sheet__row" method="dialog">
+      <button class="sheet__cta" type="submit">Got it</button>
+      <a class="sheet__credit" href="https://www.instagram.com/archieauburn/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5.5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Made by Archie Auburn
+      </a>
+    </form>
+  </dialog>
+
+  <dialog class="sheet sheet--lid glass">
+    <p class="sheet__eyebrow">Solo</p>
+    <h2>Close the lid to fold</h2>
+    <p>
+      The smooth fold needs a small helper on your Mac.
+      It polls the hinge on your machine and nothing is uploaded.
+      The first run sets up its own Python environment,
+      so you do not install anything system-wide.
+    </p>
+    <ol class="tiles">
+      <li>Download <a class="sheet__link" href="bridge/lid-bridge.py" download>lid-bridge.py</a>.</li>
+      <li>In Terminal, run the command below.</li>
+      <li>Close the lid slowly.</li>
+    </ol>
+    <code class="sheet__cmd">python3 ~/Downloads/lid-bridge.py</code>
+    <p class="hid-only">
+      Chrome can Allow the lid sensor instead, without Terminal,
+      but that path only updates about once a second.
+    </p>
+    <p class="sheet__status" role="status">Waiting for the lid stream…</p>
+    <div class="sheet__row">
+      <button class="sheet__cta" type="button" data-action="continue">Continue</button>
+      <button class="sheet__cta sheet__cta--quiet hid-only" type="button" data-action="allow">Allow lid sensor</button>
+      <button class="sheet__cta sheet__cta--quiet" type="button" data-action="preview">Preview with trackpad</button>
+      <a class="sheet__credit" href="https://www.instagram.com/archieauburn/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5.5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Made by Archie Auburn
+      </a>
+    </div>
+  </dialog>
+
+  <script src="gl.js"></script>
+  <script src="fold.js"></script>
+  <script src="lid.js"></script>
+  <script src="phone.js"></script>
+  <script src="laptop.js"></script>
+  <script src="app.js"></script>
+  <script src="background.js"></script>
+</body>
+</html>
